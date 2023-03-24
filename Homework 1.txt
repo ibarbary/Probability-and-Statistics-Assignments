@@ -29,9 +29,9 @@ ans: (4*5*4) + (2*4*3) = 104
 8) In a Discrete Mathematics class, that contains 25 students, among whom are two students with name “Ahmed”, two students with name “Sally”, two students with name “Mariam”, two students with name “Yousef”, and two students with name “Ibrahim” (along with the reminder twenty two students whose names are all distinct from those five names and from one another’s names).
 (a) How many different 14-student study-groups can be formed such that within the study group, there is exactly one student with name “Ahmed”, exactly one student with name “Sally”, exactly one student with name “Mariam”, exactly one student with name “Yousef”, and exactly one student with name “Ibrahim”?
 
-ans: 15!/((15-9)*9!) = 600600
+ans: 15!/((15-9)!*9!) = 5005
 
 (b) If the instructor is randomly assigning 14 of these students to a project-team, so what is the ways this team could be formed such that this team will contain two 
 students both with name “Ahmed”, two students both with name “Sally”, two students both with name “Mariam”, two students both with name “Yousef”, and two students both with name “Ibrahim”?
 
-ans: 15!/((15-4)*4!) = 4953312000
+ans: 15!/((15-4)!*4!) = 1365
