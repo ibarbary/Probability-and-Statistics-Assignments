@@ -50,8 +50,8 @@ Find  _
 (ii) P(B) = 1/2
         _   _      _      _      _   _
 (iii) P(A ∩ B) = P(A) + P(B) - P(A U B) = 5/8 + 1/2 - 1/2 = 5/8
-       _   _      _      _      _   _
-(iv) P(A U B) = P(A) + P(B) - P(A ∩ B) = 5/8 + 1/2 - 5/8 = 1/2
+       _   _      _____   
+(iv) P(A U B) = P(A ∩ B) = 1 - P(A ∩ B) = 1/2
           _
 (v) P(A ∩ B) = P(A) - P(A ∩ B) = 3/8 - 1/2 = -1/8    // Can't be calculated
            _   
