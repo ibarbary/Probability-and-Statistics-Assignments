@@ -1,6 +1,3 @@
-﻿using System.Collections.Specialized;
-using System.Security.Cryptography;
-
 internal class Program
 {
     static double median(int[] a)
@@ -19,22 +16,40 @@ internal class Program
 
     static int mode(int[] a)
     {
-        int mostFrequent = 0;
+        Dictionary<int, int> d = new Dictionary<int, int>();
+
         for (int i = 0; i < a.Length; i++)
         {
-            int count = 0;
-            for (int j = 0; j < a.Length; j++)
-            {
-                if (a[j] == a[i])
-                    ++count;
-            }
-
-            if (count > mostFrequent)
-                mostFrequent = count;
+            if (d.ContainsKey(a[i]) == false)
+                d[a[i]] = 1;
+            else
+                d[a[i]] = d[a[i]] + 1;
         }
 
-        if (mostFrequent == 1)
-            return 0;
+        int mostFrequent = 0;
+        int count = 0;
+        foreach(var n in d)
+        {
+            if (n.Value > count)
+            {
+                mostFrequent = n.Key;
+                count = n.Value;
+            }
+        }
+
+        bool isAllEqualCount = true;
+        foreach (var n in d)
+        {
+            if(n.Value != count)
+            {
+                isAllEqualCount = false;
+                break;
+            }
+
+        }
+
+        if (isAllEqualCount)
+        return 0;
 
         return mostFrequent;
     }
@@ -46,12 +61,6 @@ internal class Program
 
     static double Quartile(int[] a, int nth)
     {
-        if (a.Length < 4)
-        {
-            Console.WriteLine("Size must be > 3");
-            return -1;
-        }
-
         int start = 0;
         int end = a.Length - 1;
         int mid = a.Length / 2;
@@ -113,9 +122,14 @@ internal class Program
 
     static double P90(int[] A)
     {
-        int indx = (int)Math.Round(A.Length * 0.90);
+        int indx = (int)Math.Ceiling(A.Length * 0.90);
 
-        return (double)A[indx - 1];
+        if(A.Length * 0.90 == indx)
+        {
+            return (double)(A[indx - 1] + A[indx]) / 2;
+        }
+
+        return (double)(A[indx - 1]);
     }
 
     public static void Main(string[] args)
@@ -138,12 +152,20 @@ internal class Program
         Console.WriteLine($"Median = {median(A)}");
         Console.WriteLine($"Mode = {mode(A)}");
         Console.WriteLine($"Range = {range(A)}");
-        Console.WriteLine($"1st Quartile = {Quartile(A, 1)}");
-        Console.WriteLine($"3rd Quartile = {Quartile(A, 3)}");
-        Console.WriteLine($"InterQuartile = {IQR}");
-        Console.WriteLine($"Outlier's Low Boundary = {lowBoundary(Quartile(A, 1), IQR)}");
-        Console.WriteLine($"Outlier's High Boundary = {highBoundary(Quartile(A, 3), IQR)}");
-        isOutlier(A, IQR);
+        if(A.Length > 3)
+        {
+            Console.WriteLine($"1st Quartile = {Quartile(A, 1)}");
+            Console.WriteLine($"3rd Quartile = {Quartile(A, 3)}");
+            Console.WriteLine($"InterQuartile = {IQR}");
+            Console.WriteLine($"Outlier's Low Boundary = {lowBoundary(Quartile(A, 1), IQR)}");
+            Console.WriteLine($"Outlier's High Boundary = {highBoundary(Quartile(A, 3), IQR)}");
+            isOutlier(A, IQR);
+        }
+        else
+        {
+            Console.WriteLine("Size of array is < 3 so we can't get Quartiles, IQR or Outliers");
+        }
+        
         Console.WriteLine($"90th Percentile = {P90(A)}");
     }
 }
