@@ -72,33 +72,28 @@ internal class Program
 
     static double Quartile(int[] a, int nth)
     {
-        int start = 0;
-        int end = a.Length - 1;
-        int mid = a.Length / 2;
-
-        if (nth == 1)
+        double q = 0;
+        int i = 0;
+        if(nth == 1)
         {
-            end = mid - 1;
+            i = (int)(0.25 * a.Length);
+            
         }
         else
         {
-            if (a.Length % 2 == 0)
-                start = mid;
-            else
-                start = mid + 1;
+            i = (int)(0.75 * a.Length);
         }
 
-        int nOfElements = end - start + 1;
-
-        int i = start + ((end - start) / 2);
-        double quart = a[i];
-
-        if (nOfElements % 2 == 0)
+        if ((a.Length / 2) % 2 == 0)
         {
-            quart = (quart + a[i + 1]) / 2;
+            q = (double)(a[i - 1] + a[i]) / 2;
         }
-
-        return quart;
+        else
+        {
+            q = a[i];
+        }
+        
+        return q;
     }
 
     static double interQuartile(double Q1, double Q3)
