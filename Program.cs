@@ -38,8 +38,14 @@ internal class Program
 
         if(d.Count == 1)
         {
-            Console.WriteLine("All items have same Frequency so mode is 0");
-            return;
+            foreach(var n in d)
+            {
+                if(n.Value.Count > 1)
+                {
+                    Console.WriteLine("All items have same Frequency so mode is 0");
+                    return;
+                }
+            }
         }
 
         int mostFrequency = 0;
