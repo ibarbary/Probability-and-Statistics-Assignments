@@ -14,44 +14,48 @@ internal class Program
 
     }
 
-    static int mode(int[] a)
+    static void mode(int[] a)
     {
-        Dictionary<int, int> d = new Dictionary<int, int>();
+        Dictionary<int, List<int>> d = new Dictionary<int, List<int>>();
+        Dictionary<int, int> freq = new Dictionary<int, int>();
 
         for (int i = 0; i < a.Length; i++)
         {
-            if (d.ContainsKey(a[i]) == false)
-                d[a[i]] = 1;
+            if (freq.ContainsKey(a[i]) == false)
+                freq[a[i]] = 1;
             else
-                d[a[i]] = d[a[i]] + 1;
+                freq[a[i]] = freq[a[i]] + 1;
         }
 
-        int mostFrequent = 0;
-        int count = 0;
+        
+        foreach(var n in freq)
+        {
+            if (d.ContainsKey(n.Value) == false)
+                d[n.Value] = new List<int>() {n.Key};
+            else
+                d[n.Value].Add(n.Key);
+        }
+
+        if(d.Count == 1)
+        {
+            Console.WriteLine("All items have same Frequency so mode is 0");
+            return;
+        }
+
+        int mostFrequency = 0;
         foreach(var n in d)
         {
-            if (n.Value > count)
-            {
-                mostFrequent = n.Key;
-                count = n.Value;
-            }
+            if (n.Key > mostFrequency)
+                mostFrequency = n.Key;
         }
 
-        bool isAllEqualCount = true;
-        foreach (var n in d)
+        Console.Write("Mode = { ");
+        foreach (var n in d[mostFrequency])
         {
-            if(n.Value != count)
-            {
-                isAllEqualCount = false;
-                break;
-            }
-
+            Console.Write(n + " ");
         }
 
-        if (isAllEqualCount)
-        return 0;
-
-        return mostFrequent;
+        Console.WriteLine("}");
     }
 
     static int range(int[] a)
@@ -150,7 +154,7 @@ internal class Program
 
         Console.WriteLine();
         Console.WriteLine($"Median = {median(A)}");
-        Console.WriteLine($"Mode = {mode(A)}");
+        mode(A);
         Console.WriteLine($"Range = {range(A)}");
         if(A.Length > 3)
         {
