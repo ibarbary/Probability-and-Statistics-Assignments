@@ -16,49 +16,50 @@ internal class Program
 
     static void mode(int[] a)
     {
-        Dictionary<int, List<int>> d = new Dictionary<int, List<int>>();
         Dictionary<int, int> freq = new Dictionary<int, int>();
 
+        int mostFreq = 0;
         for (int i = 0; i < a.Length; i++)
         {
             if (freq.ContainsKey(a[i]) == false)
                 freq[a[i]] = 1;
             else
                 freq[a[i]] = freq[a[i]] + 1;
+
+            if (freq[a[i]] > mostFreq)
+                mostFreq = freq[a[i]];
         }
 
-        
-        foreach(var n in freq)
+        if (freq.Count == 1)
         {
-            if (d.ContainsKey(n.Value) == false)
-                d[n.Value] = new List<int>() {n.Key};
-            else
-                d[n.Value].Add(n.Key);
+            Console.Write("Mode = ");
+            foreach (var n in freq)
+                Console.WriteLine(n.Key);
+
+            return;
         }
 
-        if(d.Count == 1)
+        bool isAllSameFreq = true;
+        foreach (var n in freq)
         {
-            foreach(var n in d)
+            if (n.Value != mostFreq)
             {
-                if(n.Value.Count > 1)
-                {
-                    Console.WriteLine("All items have same Frequency so mode is 0");
-                    return;
-                }
+                isAllSameFreq = false;
+                break;
             }
         }
 
-        int mostFrequency = 0;
-        foreach(var n in d)
+        if (isAllSameFreq == true)
         {
-            if (n.Key > mostFrequency)
-                mostFrequency = n.Key;
+            Console.WriteLine("No Mode as all items have same frequency");
+            return;
         }
 
         Console.Write("Mode = { ");
-        foreach (var n in d[mostFrequency])
+        foreach (var n in freq)
         {
-            Console.Write(n + " ");
+            if(n.Value == mostFreq)
+                Console.Write(n.Key + " ");
         }
 
         Console.WriteLine("}");
