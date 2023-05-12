@@ -157,14 +157,13 @@ internal class Program
 
         Array.Sort(A);
 
-        double IQR = interQuartile(Quartile(A, 1), Quartile(A, 3));
-
         Console.WriteLine();
         Console.WriteLine($"Median = {median(A)}");
         mode(A);
         Console.WriteLine($"Range = {range(A)}");
         if(A.Length > 3)
         {
+            double IQR = interQuartile(Quartile(A, 1), Quartile(A, 3));
             Console.WriteLine($"1st Quartile = {Quartile(A, 1)}");
             Console.WriteLine($"3rd Quartile = {Quartile(A, 3)}");
             Console.WriteLine($"InterQuartile = {IQR}");
