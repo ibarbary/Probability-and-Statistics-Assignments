@@ -99,6 +99,31 @@ internal class Program
         }
 
         return quart;
+        /*double q = 0;
+        int i = 0;
+        if(nth == 1)
+        {
+            i = (int)(0.25 * a.Length);
+            
+        }
+        else
+        {
+            i = (int)Math.Ceiling(0.75 * a.Length);
+        }
+
+        if ((a.Length / 2) % 2 == 0)
+        {
+            q = (double)(a[i - 1] + a[i]) / 2;
+        }
+        else
+        {
+            q = a[i];
+
+            if (nth == 3)
+            --q;
+        }
+        
+        return q;*/
     }
 
     static double interQuartile(double Q1, double Q3)
