@@ -156,16 +156,11 @@ internal class Program
         Console.WriteLine();
     }
 
-    static double P90(int[] A)
+    static int Percentile(int[] A, int k)
     {
-        int indx = (int)Math.Ceiling(A.Length * 0.90);
-
-        if(A.Length * 0.90 == indx)
-        {
-            return (double)(A[indx - 1] + A[indx]) / 2;
-        }
-
-        return (double)(A[indx - 1]);
+        int position = (int)Math.Round(A.Length * k / 100);
+        
+        return A[position - 1];
     }
 
     public static void Main(string[] args)
@@ -201,6 +196,6 @@ internal class Program
             Console.WriteLine("Size of array is < 3 so we can't get Quartiles, IQR or Outliers");
         }
         
-        Console.WriteLine($"90th Percentile = {P90(A)}");
+        Console.WriteLine($"Percentile = {Percentile(A, 90)}");
     }
 }
