@@ -158,7 +158,7 @@ internal class Program
 
     static int Percentile(int[] A, int k)
     {
-        int position = (int)Math.Round(A.Length * k / 100);
+        int position = (int)Math.Floor((double)A.Length * k / 100);
         
         return A[position - 1];
     }
